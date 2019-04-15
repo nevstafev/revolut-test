@@ -22,14 +22,24 @@ public class AccountService {
                 throw new IllegalArgumentException("Accounts id can't be the same");
             }
             Account accountFrom = getAccountById(sourceId);
+            if(accountFrom.getBalance() < amount) {
+                throw new IllegalArgumentException("Amount can't be greater than account balance");
+            }
             Account accountTo = getAccountById(destinationId);
-
-
+            withdraw(accountFrom, amount);
+            deposit(accountTo, amount);
         } finally {
             lock.unlock();
         }
     }
 
+    private void withdraw(Account account, long amount) {
+        account.setBalance(account.getBalance() - amount);
+    }
+
+    private void deposit(Account account, long amount) {
+        account.setBalance(account.getBalance() + amount);
+    }
 
     private Account getAccountById(String id) {
         try {
