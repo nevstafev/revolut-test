@@ -2,7 +2,9 @@ package app;
 
 import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
+import service.AccountService;
 import service.RestService;
 
 import javax.ws.rs.ext.RuntimeDelegate;
@@ -12,6 +14,12 @@ public class Application {
     public static void main(String[] args) {
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.register(RestService.class);
+        resourceConfig.register(new AbstractBinder() {
+            @Override
+            protected void configure() {
+                bind(new AccountService()).to(AccountService.class);
+            }
+        });
 
         HttpHandler endpoint = RuntimeDelegate.getInstance().createEndpoint(resourceConfig, HttpHandler.class);
         HttpServer server = HttpServer.createSimpleServer("http://localhost", 8080);

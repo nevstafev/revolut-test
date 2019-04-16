@@ -3,6 +3,7 @@ package service;
 
 import model.Account;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -13,16 +14,12 @@ import java.util.Collection;
 @Produces(MediaType.APPLICATION_JSON)
 public class RestService {
 
-    private final AccountService service;
-
-    public RestService() {
-        this.service = new AccountService();
-        service.createNewAccount(100L);
-    }
+    @Inject
+    private AccountService service;
 
     @GET
     public Response getAccounts() {
-        return Response.ok((Collection)service.getAccounts()).build();
+        return Response.ok(service.getAccounts()).build();
     }
 
     @GET
