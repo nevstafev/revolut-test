@@ -36,8 +36,8 @@ public class TransferResource {
 
     @POST
     @Path("/accounts")
-    @Consumes("application/json")
-    public Response createAccount(@PathParam("amount") long amount) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createAccount(long amount) {
         Account account = service.createAccount(amount);
         return Response.ok(account).build();
     }
