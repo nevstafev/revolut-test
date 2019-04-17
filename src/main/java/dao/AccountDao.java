@@ -33,7 +33,7 @@ public class AccountDao {
     }
 
     private void validateId(String id) {
-        if (id != null || !accounts.containsKey(id)) {
+        if (id == null || !accounts.containsKey(id)) {
             throw new IllegalArgumentException("Account not found.");
         }
     }

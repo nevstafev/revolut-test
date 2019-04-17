@@ -30,7 +30,7 @@ public class TransactionDao {
     }
 
     private void validateId(String id) {
-        if (id != null || !transactions.containsKey(id)) {
+        if (id == null || !transactions.containsKey(id)) {
             throw new IllegalArgumentException("Transaction not found.");
         }
     }

@@ -1,13 +1,20 @@
 package resource;
 
 
-import model.Account;
-import service.TransferService;
-
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import model.Account;
+import resource.requests.CreateAccountRequest;
+import resource.requests.TransferRequest;
+import service.TransferService;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
@@ -37,18 +44,18 @@ public class TransferResource {
     @POST
     @Path("/accounts")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createAccount(long amount) {
-        Account account = service.createAccount(amount);
+    public Response createAccount(CreateAccountRequest request) {
+        Account account = service.createAccount(request.getInitialAmount());
         return Response.ok(account).build();
     }
 
     @PUT
     @Path("/transfer")
-    @Consumes("application/json")
-    public Response transferMoney(@PathParam("sourceAccountId") String sourceAccountId,
-                                  @PathParam("destinationAccountId") String destinationAccountId,
-                                  @PathParam("amount") long amount) {
-        return Response.ok(service.createTransferRequest(sourceAccountId, destinationAccountId, amount)).build();
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response transferMoney(TransferRequest request) {
+        return Response.ok(service.createTransferRequest(request.getSourceAccountId(),
+                request.getDestinationAccountId(),
+                request.getAmount())).build();
     }
 
     @GET
