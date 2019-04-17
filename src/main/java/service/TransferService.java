@@ -49,11 +49,12 @@ public class TransferService {
         }
     }
 
-    public String createTransferRequest(String sourceAccountId, String destinationAccountId, long amount) {
+    public Transaction createTransferRequest(String sourceAccountId, String destinationAccountId, long amount) {
         Transaction transaction = transactions.create(sourceAccountId, destinationAccountId, amount);
         Runnable task = createTransactionTask(transaction);
         executor.execute(task);
-        return transaction.getId();
+        transaction.setStatus(Transaction.SUBMITTED);
+        return transaction;
     }
 
     private Runnable createTransactionTask(Transaction transaction) {

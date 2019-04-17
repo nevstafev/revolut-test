@@ -6,6 +6,8 @@ import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
+import resource.AccountResource;
+import resource.TransactionResource;
 import resource.TransferResource;
 import service.TransferService;
 
@@ -16,6 +18,8 @@ public class Application {
     public static void main(String[] args) {
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.register(TransferResource.class);
+        resourceConfig.register(AccountResource.class);
+        resourceConfig.register(TransactionResource.class);
         resourceConfig.register(new AbstractBinder() {
             @Override
             protected void configure() {
