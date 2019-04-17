@@ -1,6 +1,6 @@
-package dao;
+package home.dao;
 
-import model.Account;
+import home.model.Account;
 
 import java.util.*;
 

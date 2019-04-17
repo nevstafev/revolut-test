@@ -1,4 +1,4 @@
-package resource.requests;
+package home.resource.requests;
 
 public class CreateAccountRequest {
     private long initialAmount;

@@ -1,9 +1,9 @@
-package resource;
+package home.resource;
 
 
-import model.Account;
-import resource.requests.CreateAccountRequest;
-import service.TransferService;
+import home.model.Account;
+import home.resource.requests.CreateAccountRequest;
+import home.service.TransferService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

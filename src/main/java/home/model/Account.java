@@ -1,4 +1,4 @@
-package model;
+package home.model;
 
 public class Account {
     private String id;

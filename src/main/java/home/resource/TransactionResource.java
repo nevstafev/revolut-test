@@ -1,6 +1,6 @@
-package resource;
+package home.resource;
 
-import service.TransferService;
+import home.service.TransferService;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

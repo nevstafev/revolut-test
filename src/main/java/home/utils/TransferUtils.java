@@ -1,6 +1,6 @@
-package Utils;
+package home.utils;
 
-import model.Account;
+import home.model.Account;
 
 import java.util.Objects;
 

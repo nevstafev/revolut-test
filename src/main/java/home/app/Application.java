@@ -1,15 +1,15 @@
-package app;
+package home.app;
 
-import dao.AccountDao;
-import dao.TransactionDao;
+import home.dao.AccountDao;
+import home.dao.TransactionDao;
 import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
-import resource.AccountResource;
-import resource.TransactionResource;
-import resource.TransferResource;
-import service.TransferService;
+import home.resource.AccountResource;
+import home.resource.TransactionResource;
+import home.resource.TransferResource;
+import home.service.TransferService;
 
 import javax.ws.rs.ext.RuntimeDelegate;
 import java.io.IOException;
