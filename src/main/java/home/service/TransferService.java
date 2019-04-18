@@ -32,14 +32,6 @@ public class TransferService {
         return accounts.get(id);
     }
 
-    public Transaction getTransaction(String transactionId) {
-        return transactions.get(transactionId);
-    }
-
-    public List<Transaction> getTransactions() {
-        return transactions.getAll();
-    }
-
     public Account createAccount(long initialBalance) {
         try {
             lock.lock();
@@ -47,6 +39,23 @@ public class TransferService {
         } finally {
             lock.unlock();
         }
+    }
+
+    public void deleteAccount(String id) {
+        try {
+            lock.lock();
+            accounts.delete(id);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public Transaction getTransaction(String transactionId) {
+        return transactions.get(transactionId);
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions.getAll();
     }
 
     public Transaction createTransferRequest(String sourceAccountId, String destinationAccountId, long amount) {

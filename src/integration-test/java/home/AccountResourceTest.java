@@ -21,8 +21,7 @@ public class AccountResourceTest extends BaseTest {
 
     @Before
     public void setUp() throws Exception {
-        client = ClientBuilder.newClient().
-                target("http://localhost:8080")
+        client = baseClient
                 .path("/accounts");
     }
 
@@ -41,19 +40,13 @@ public class AccountResourceTest extends BaseTest {
     public void testGetAccountById() {
         Account account = createAccount(0);
 
-        Account accountById = client
-                .path(account.getId())
-                .request(MediaType.APPLICATION_JSON)
-                .get(Account.class);
+        Account accountById = getAccountById(account.getId());
 
         Assert.assertThat(accountById.getId(), Is.is(account.getId()));
         Assert.assertThat(accountById.getBalance(), Is.is(account.getBalance()));
     }
 
-    private Account createAccount(long i) {
-        return client.request().post(Entity.entity(new CreateAccountRequest(i),
-                MediaType.APPLICATION_JSON), Account.class);
-    }
+
 
     @Test
     public void testGetAllAccounts() {
@@ -63,10 +56,21 @@ public class AccountResourceTest extends BaseTest {
             createdAccounts.add(createAccount(i));
         }
 
-        List<Account> accounts = client.request(MediaType.APPLICATION_JSON)
-                .get(new GenericType<List<Account>>());
+        List<Account> accounts = getAccounts();
 
         Assert.assertThat(accounts.size(), Is.is(createdAccounts.size()));
         Assert.assertTrue(accounts.containsAll(createdAccounts));
     }
+
+    @Test
+    public void testDeleteAccount() {
+        Account account = createAccount(0);
+
+        client.path(account.getId()).request().delete();
+
+        List<Account> accounts = getAccounts();
+        Assert.assertThat(accounts.size(), Is.is(0));
+    }
+
+
 }

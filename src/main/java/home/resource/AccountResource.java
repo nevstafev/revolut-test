@@ -39,4 +39,16 @@ public class AccountResource {
         Account account = service.createAccount(request.getInitialAmount());
         return Response.ok(account, MediaType.APPLICATION_JSON).build();
     }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteAccountById(@PathParam("id") String id) {
+        try {
+            service.deleteAccount(id);
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok().build();
+    }
 }
+

@@ -13,6 +13,9 @@ public class Transaction {
     long amount;
     String status;
 
+    public Transaction() {
+    }
+
     public Transaction(String id, String sourceId, String destinationId, long amount) {
         this.id = id;
         this.sourceId = sourceId;

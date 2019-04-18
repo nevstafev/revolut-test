@@ -5,6 +5,15 @@ public class TransferRequest {
     private String destinationAccountId;
     private long amount;
 
+    public TransferRequest() {
+    }
+
+    public TransferRequest(String sourceAccountId, String destinationAccountId, long amount) {
+        this.sourceAccountId = sourceAccountId;
+        this.destinationAccountId = destinationAccountId;
+        this.amount = amount;
+    }
+
     public String getSourceAccountId() {
         return sourceAccountId;
     }
