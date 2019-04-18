@@ -24,6 +24,7 @@ public class TransferResourceTest extends BaseTest {
     public static final long TRANSFER_AMOUNT = 10_00;
 
     WebTarget transferClient = baseClient.path("transfer");
+    WebTarget transactionClient = baseClient.path("transactions");
 
     @Test
     public void simpleTransferTest() {
@@ -55,8 +56,13 @@ public class TransferResourceTest extends BaseTest {
         Account accountWithZeroBalanceAfterTransfer = getAccountById(accountWithZeroBalance.getId());
         Account destinationAccountAfterTransfer = getAccountById(destinationAccount.getId());
 
-        Assert.assertThat(transaction.getStatus(), Is.is(Transaction.FAILED));
-        Assert.assertThat(transaction.getAmount(), Is.is(TRANSFER_AMOUNT));
+        Transaction transactionAfterTransfer = transactionClient
+                .path(transaction.getId())
+                .request(MediaType.APPLICATION_JSON)
+                .get(Transaction.class);
+
+        Assert.assertThat(transactionAfterTransfer.getStatus(), Is.is(Transaction.FAILED));
+        Assert.assertThat(transactionAfterTransfer.getAmount(), Is.is(TRANSFER_AMOUNT));
         Assert.assertThat(accountWithZeroBalanceAfterTransfer.getBalance(), Is.is(zeroInitialBalance));
         Assert.assertThat(destinationAccountAfterTransfer.getBalance(), Is.is(INITIAL_BALANCE));
     }

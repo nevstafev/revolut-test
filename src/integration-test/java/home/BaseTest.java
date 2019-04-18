@@ -12,7 +12,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 public abstract class BaseTest {
 
@@ -22,7 +21,7 @@ public abstract class BaseTest {
     @Before
     public void setUpBaseTest() throws Exception {
         application = new Application();
-        Executors.newSingleThreadExecutor().execute(() -> application.run());
+        application.run();
     }
 
     @After

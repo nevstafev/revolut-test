@@ -9,6 +9,7 @@ import home.service.TransferService;
 import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ext.RuntimeDelegate;
@@ -21,12 +22,14 @@ public class Application {
     public static void main(String[] args) throws IOException {
         Application application = new Application();
         application.run();
+        System.out.println("Application has started. For exit press 'Enter'");
         System.in.read();
         application.shoutDown();
     }
 
     public void run() {
         ResourceConfig resourceConfig = new ResourceConfig();
+        resourceConfig.register(JacksonFeature.class);
         resourceConfig.register(TransferResource.class);
         resourceConfig.register(AccountResource.class);
         resourceConfig.register(TransactionResource.class);

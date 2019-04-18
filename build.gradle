@@ -36,6 +36,16 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    manifest {
+        attributes "Main-Class": "home.app.Application"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 dependencies {
     testCompile 'junit:junit:4.12'
     compile 'javax.ws.rs:javax.ws.rs-api:2.1.1'
