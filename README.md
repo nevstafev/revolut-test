@@ -1,8 +1,8 @@
-##Revolut test task
+## Revolut test task
 
 This is a simple service for transfer money.
 
-####How it works:
+#### How it works:
 
 For creating accounts it uses simple rest api.
 
@@ -24,7 +24,7 @@ Use `Content-Type application/json` header
 
 ##### Accounts
 
-######For create account
+###### For create account
 
 ` POST /accounts` with body 
 
@@ -39,7 +39,7 @@ Use `Content-Type application/json` header
 }
 ```
 
-######Get account by id
+###### Get account by id
 
 `GET /accounts/{id}`
 
@@ -52,7 +52,7 @@ Use `Content-Type application/json` header
 }
 ```
 
-######Get all accounts
+###### Get all accounts
 
 `GET /accounts`
 
@@ -71,9 +71,9 @@ Use `Content-Type application/json` header
 ]
 ```
 
-####Transfer
+#### Transfer
 
-######Create transfer 
+###### Create transfer 
 
 `PUT /transfer` with body:
 ```
